@@ -22,7 +22,7 @@ provider:
 
 functions:
   ampQuickSignup:
-    handler: index.ampQuickSignup
+    handler: src/index.ampQuickSignup
     events:
       - http:
           method: post
