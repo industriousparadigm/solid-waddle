@@ -2,7 +2,21 @@ import SHA1 from 'crypto-js/sha1'
 import encodeUtf8 from 'crypto-js/enc-utf8'
 import encodeBase64 from 'crypto-js/enc-base64'
 
-const generateToken = (payload) => {
+type QuickSubPayload = {
+  verticalID: string
+  email: string
+  referrer: {
+    campaign: string
+    internalCTA: string
+    medium: string
+    pageURL: string
+    referrerURL: string
+    source: string
+    postID: string
+  }
+}
+
+const generateToken = (payload: QuickSubPayload) => {
   const identifier = 'TelemetryPayload'
 
   let stringOfPayloadValues = ''
@@ -44,7 +58,7 @@ const getCorsOrigin = (req) => {
 
   return allowedOrigins.indexOf(sourceOrigin) !== -1
     ? sourceOrigin
-    : publisherOrigin
+    : publisherOrigin || req?.headers?.origin
 }
 
 export { getCorsOrigin, generateToken }

@@ -1,5 +1,5 @@
 service:
-  name: solid-waddle
+  name: alexandria-amp-quick-signup
 
 custom:
   webpack:
@@ -21,10 +21,10 @@ provider:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
 functions:
-  quickSignup:
-    handler: handler.quickSignup
+  ampQuickSignup:
+    handler: index.ampQuickSignup
     events:
       - http:
           method: post
-          path: quick-signup
+          path: amp-quick-signup
           cors: true
