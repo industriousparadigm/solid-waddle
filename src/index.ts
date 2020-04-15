@@ -7,10 +7,9 @@ import multipart from 'aws-lambda-multipart-parser'
 
 export const ampQuickSignup: APIGatewayProxyHandler = async (event) => {
   // get AMP form data
-  const { verticalID, email, source, postID, pageURL } = multipart.parse(
-    event,
-    true
-  )
+  const ampFormData = multipart.parse(event, true)
+  const { verticalID, email, source, postID, pageURL } = ampFormData
+
   // build payload
   const payload = {
     verticalID,
@@ -43,8 +42,8 @@ export const ampQuickSignup: APIGatewayProxyHandler = async (event) => {
     body: JSON.stringify(
       {
         message: `Congratulations! 'ampQuickSignup' endpoint hit with a ${alexandriaResponse.status} response`,
-        ampFormData: multipart.parse(event, true),
         alexandriaResponse,
+        ...ampFormData,
       },
       null,
       2
